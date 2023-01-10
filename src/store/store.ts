@@ -1,11 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { storyApi } from "../services/story-service";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  [storyApi.reducerPath]: storyApi.reducer,
+});
 
 const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(storyApi.middleware),
   });
 };
 
